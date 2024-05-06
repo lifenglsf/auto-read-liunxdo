@@ -102,7 +102,7 @@
 
     // 根据随机索引选择一个URL
     const nextTopicURL = urls[randomIndex]; // 在跳转之前，标记即将跳转到下一个话题
-    console.log("nextTopicUrl",nextTopicUrl)
+    console.log("nextTopicUrl",nextTopicURL)
     localStorage.setItem("navigatingToNextTopic", "true");
     // 尝试导航到下一个话题
     window.location.href = nextTopicURL;
