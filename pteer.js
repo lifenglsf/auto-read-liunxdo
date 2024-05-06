@@ -7,6 +7,7 @@ require("dotenv").config();
 const usernames = process.env.USERNAMES.split(",");
 const passwords = process.env.PASSWORDS.split(",");
 const loginUrl = process.env.WEBSITE;
+console.log("usernames",usernames,"passwords",passwords)
 // 每个浏览器实例之间的延迟时间(毫秒)
 const delayBetweenInstances = 10000;
 //随机等待时间
