@@ -108,10 +108,12 @@
     window.location.href = nextTopicURL;
   }
   let readCount=0;
+  let totalReadCount=Math.floor(20+Math.random()*50);
+  console.log("total read count",totalReadCount);                          
   // 检查是否已滚动到底部(不断重复执行)
   function checkScroll() {
     if (localStorage.getItem("read")) {
-      if(readCount>Math.floor(20+Math.random()*50)){
+      if(readCount>totalReadCount){
         return
       }
       if (
