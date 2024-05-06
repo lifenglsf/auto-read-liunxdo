@@ -52,10 +52,10 @@
   // 更新初始数据的函数
   function updateInitialData() {
     localStorage.setItem("read", "true"); // 开始时自动滚动关闭
-    localStorage.setItem("autoLikeEnabled", "true"); //默认关闭自动点赞
+    localStorage.setItem("autoLikeEnabled", "false"); //默认关闭自动点赞
     console.log("执行了初始数据更新操作");
   }
-  const delay = 2000; // 滚动检查的间隔（毫秒）
+  const delay = 5000; // 滚动检查的间隔（毫秒）
   let scrollInterval = null;
   let checkScrollTimeout = null;
   let autoLikeInterval = null;
@@ -92,7 +92,8 @@
     const urls = [
       `${BASE_URL}/latest`,
       `${BASE_URL}/top`,
-      `${BASE_URL}/latest?ascending=false&order=posts`,
+      `${BASE_URL}`,
+      //`${BASE_URL}/latest?ascending=false&order=posts`,
       // `${BASE_URL}/unread`, // 示例：如果你想将这个URL启用，只需去掉前面的注释
     ];
 
@@ -150,7 +151,7 @@
             20,
             20
           );
-        }, 2000); // 延迟2000毫秒（即2秒）
+        }, 3000); // 延迟2000毫秒（即2秒）
       } else {
         console.log("执行正常的滚动和检查逻辑");
         // 执行正常的滚动和检查逻辑
