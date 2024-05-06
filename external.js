@@ -102,20 +102,25 @@
 
     // 根据随机索引选择一个URL
     const nextTopicURL = urls[randomIndex]; // 在跳转之前，标记即将跳转到下一个话题
+    console.log("nextTopicUrl",nextTopicUrl)
     localStorage.setItem("navigatingToNextTopic", "true");
     // 尝试导航到下一个话题
     window.location.href = nextTopicURL;
   }
-
+  let readCount=0;
   // 检查是否已滚动到底部(不断重复执行)
   function checkScroll() {
     if (localStorage.getItem("read")) {
+      if(readCount>Math.floor(20+Math.random()*50)){
+        return
+      }
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
         console.log("已滚动到底部");
         navigateToNextTopic();
+        readCount++
       } else {
         scrollToBottomSlowly();
         if (checkScrollTimeout !== null) {
