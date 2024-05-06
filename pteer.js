@@ -144,7 +144,7 @@ async function launchBrowserForUser(username, password) {
     // page.on("load", async () => {
     //   await page.evaluate(externalScript);
     // });
-    await page.goto("https://linux.do/t/topic/13716/110");
+    await page.goto("https://linux.do/t/topic/5");
   } catch (err) {
     console.log(err);
   }
