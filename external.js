@@ -108,7 +108,7 @@
     window.location.href = nextTopicURL;
   }
   let readCount=parseInt(localStorage.getItem("readCounter") || "0", 10);;
-  let totalReadCount=18;
+  let totalReadCount=8;
   console.log("total read count",totalReadCount);                          
   // 检查是否已滚动到底部(不断重复执行)
   function checkScroll() {
@@ -121,10 +121,11 @@
         document.body.offsetHeight - 100
       ) {
         console.log("已滚动到底部");
-        navigateToNextTopic();
         readCount++
-        localStorage.setItem("readCounter", readCounter.toString());
+        localStorage.setItem("readCounter", readCount.toString());
         console.log("read count value is:",readCount);
+        navigateToNextTopic();
+
       } else {
         scrollToBottomSlowly();
         if (checkScrollTimeout !== null) {
