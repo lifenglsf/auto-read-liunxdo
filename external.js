@@ -115,7 +115,16 @@
     if (localStorage.getItem("read")) {
       if(readCount>totalReadCount){
         console.log("read count比total read count大了，应该要停止了")
-        browser.close();
+        if (scrollInterval !== null) {
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+        }
+        if (checkScrollTimeout !== null) {
+          clearTimeout(checkScrollTimeout);
+        }
+        checkScrollTimeout=null;
+        localStorage.removeItem("navigatingToNextTopic");
+      
         return
       }
       if (
