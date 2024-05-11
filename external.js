@@ -124,8 +124,6 @@
         }
         checkScrollTimeout=null;
         localStorage.removeItem("navigatingToNextTopic");
-      
-        return
       }
       if (
         window.innerHeight + window.scrollY >=
