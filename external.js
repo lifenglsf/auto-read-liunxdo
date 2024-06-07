@@ -113,18 +113,18 @@
   // 检查是否已滚动到底部(不断重复执行)
   function checkScroll() {
     if (localStorage.getItem("read")) {
-      if(readCount>totalReadCount){
-        console.log("read count比total read count大了，应该要停止了")
-        if (scrollInterval !== null) {
-          clearInterval(scrollInterval);
-          scrollInterval = null;
-        }
-        if (checkScrollTimeout !== null) {
-          clearTimeout(checkScrollTimeout);
-        }
-        checkScrollTimeout=null;
-        localStorage.removeItem("navigatingToNextTopic");
-      }
+      // if(readCount>totalReadCount){
+      //   console.log("read count比total read count大了，应该要停止了")
+      //   if (scrollInterval !== null) {
+      //     clearInterval(scrollInterval);
+      //     scrollInterval = null;
+      //   }
+      //   if (checkScrollTimeout !== null) {
+      //     clearTimeout(checkScrollTimeout);
+      //   }
+      //   checkScrollTimeout=null;
+      //   localStorage.removeItem("navigatingToNextTopic");
+      // }
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
