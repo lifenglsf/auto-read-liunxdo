@@ -20,15 +20,15 @@
   ("use strict");
   // 定义可能的基本URL
   const possibleBaseURLs = [
-    "https://meta.discourse.org",
+    //"https://meta.discourse.org",
     "https://linux.do",
-    "https://meta.appinn.net",
-    "https://community.openai.com",
+    //"https://meta.appinn.net",
+    //"https://community.openai.com",
   ];
   const commentLimit = 1000;
   const specificUserPostListLimit = 100;
   const currentURL = window.location.href;
-  let specificUser = localStorage.getItem("specificUser") || "14790897";
+  let specificUser = localStorage.getItem("specificUser") || "1231";
   let likeLimit = parseInt(localStorage.getItem("likeLimit") || 200, 10);
   let BASE_URL = possibleBaseURLs.find((url) => currentURL.startsWith(url));
 
