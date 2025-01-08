@@ -187,7 +187,7 @@ async function launchBrowserForUser(username, password) {
       console.error(`Page error: ${error.message}`);
     });
     page.on("error", async (error) => {
-      console.error(`Error: ${error.message}`);
+      // console.error(`Error: ${error.message}`);
       // 检查是否是 localStorage 的访问权限错误
       if (
         error.message.includes(
@@ -200,7 +200,7 @@ async function launchBrowserForUser(username, password) {
       }
     });
     page.on("console", async (msg) => {
-      console.log("PAGE LOG:", msg.text());
+      // console.log("PAGE LOG:", msg.text());
       // 使用一个标志变量来检测是否已经刷新过页面
       if (
         !page._isReloaded &&
@@ -257,7 +257,7 @@ async function launchBrowserForUser(username, password) {
     });
     // 如果是Linuxdo，就导航到我的帖子，但我感觉这里写没什么用，因为外部脚本已经定义好了，不对，这里不会点击按钮，所以不会跳转，需要手动跳转
     if (loginUrl == "https://linux.do") {
-      await page.goto("https://linux.do/t/topic/13716/400", {
+      await page.goto("https://linux.do/t/topic/13716/630", {
         waitUntil: "domcontentloaded",
       });
     } else if (loginUrl == "https://meta.appinn.net") {
@@ -406,3 +406,93 @@ async function takeScreenshots(page) {
     }
   });
 }
+import express from "express";
+
+const healthApp = express();
+const HEALTH_PORT = process.env.HEALTH_PORT || 7860;
+
+// 健康探针路由
+healthApp.get("/health", (req, res) => {
+  const memoryUsage = process.memoryUsage();
+
+  // 将字节转换为MB
+  const memoryUsageMB = {
+    rss: `${(memoryUsage.rss / (1024 * 1024)).toFixed(2)} MB`, // 转换为MB并保留两位小数
+    heapTotal: `${(memoryUsage.heapTotal / (1024 * 1024)).toFixed(2)} MB`,
+    heapUsed: `${(memoryUsage.heapUsed / (1024 * 1024)).toFixed(2)} MB`,
+    external: `${(memoryUsage.external / (1024 * 1024)).toFixed(2)} MB`,
+    arrayBuffers: `${(memoryUsage.arrayBuffers / (1024 * 1024)).toFixed(2)} MB`,
+  };
+
+  const healthData = {
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    memoryUsage: memoryUsageMB,
+    uptime: process.uptime().toFixed(2), // 保留两位小数
+  };
+
+  res.status(200).json(healthData);
+});
+healthApp.get("/", (req, res) => {
+  res.send(`
+    <html>
+      <head>
+        <title>Auto Read</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+          }
+          h1 {
+            color: #007bff;
+          }
+          p {
+            font-size: 18px;
+            margin: 15px 0;
+          }
+          a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+          footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Welcome to the Auto Read App</h1>
+          <p>You can check the server's health at <a href="/health">/health</a>.</p>
+          <p>GitHub: <a href="https://github.com/14790897/auto-read-liunxdo" target="_blank">https://github.com/14790897/auto-read-liunxdo</a></p>
+          <footer>&copy; 2024 Auto Read App</footer>
+        </div>
+      </body>
+    </html>
+  `);
+});
+healthApp.listen(HEALTH_PORT, () => {
+  console.log(
+    `Health check endpoint is running at http://localhost:${HEALTH_PORT}/health`
+  );
+});
