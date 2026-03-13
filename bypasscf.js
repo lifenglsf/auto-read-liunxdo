@@ -598,6 +598,7 @@ async function login(page, username, password, retryCount = 3) {
       return false; // 返回false表示没有找到按钮
     }
   });
+  console.log("loginurl",loginUrl)
   if (!loginButtonFound) {
     if (loginUrl == "https://meta.appinn.net") {
       await page.goto("https://meta.appinn.net/t/topic/52006", {
