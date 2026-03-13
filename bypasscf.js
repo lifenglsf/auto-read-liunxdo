@@ -82,7 +82,7 @@ const usernames = process.env.USERNAMES.split(",");
 const passwords = process.env.PASSWORDS ? process.env.PASSWORDS.split(",") : [];
 // 读取每个账号对应的Cookie（逗号分隔，与USERNAMES一一对应），有Cookie则跳过表单登录
 const cookiesEnv = process.env.COOKIES ? process.env.COOKIES.split(",") : [];
-const loginUrl = process.env.WEBSITE || "https://linux.do"; //在GitHub action环境里它不能读取默认环境变量,只能在这里设置默认值
+const loginUrl =  "https://linux.do"; //在GitHub action环境里它不能读取默认环境变量,只能在这里设置默认值
 const delayBetweenInstances = 10000;
 const totalAccounts =usernames.length; // 总的账号数
 const delayBetweenBatches =
